@@ -4,6 +4,8 @@ RCSwitch
 About
 -----
 
+This is a [RCSwitch](https://code.google.com/p/rc-switch/) fork for [Spark Core](https://www.spark.io/).
+
 ### Send RC codes
 
 Use your Arduino to operate remote radio controlled devices. This will most likely work with all popular low cost power outlet sockets.
