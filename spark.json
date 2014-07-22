@@ -1,6 +1,6 @@
 {
     "name": "RCSwitch",
-    "version": "2.52.0",
+    "version": "2.5.2",
     "author": "Suat Özgür <s@sui.li>",
     "license": "GNU Lesser GPL",
     "description": "Library to operate low cost 315 MHz / 433 MHz remote control devices"
