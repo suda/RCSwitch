@@ -319,7 +319,7 @@ char* RCSwitch::getCodeWordC(char sFamily, int nGroup, int nDevice, boolean bSta
   static char sReturn[13];
   int nReturnPos = 0;
 
-  if ( (byte)sFamily < 97 || (byte)sFamily > 112 || nGroup < 1 || nGroup > 4 || nDevice < 1 || nDevice > 4) {
+  if ( (byte)sFamily < 97 || (byte)sFamily > 102 || nGroup < 1 || nGroup > 4 || nDevice < 1 || nDevice > 4) {
     return '\0';
   }
 
