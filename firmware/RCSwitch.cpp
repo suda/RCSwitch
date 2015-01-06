@@ -142,7 +142,7 @@ void RCSwitch::switchOff(char sGroup, int nDevice) {
 /**
  * Switch a remote switch on (Type C Intertechno)
  *
- * @param sFamily  Familycode (a..f)
+ * @param sFamily  Familycode (a..p)
  * @param nGroup   Number of group (1..4)
  * @param nDevice  Number of device (1..4)
   */
@@ -153,7 +153,7 @@ void RCSwitch::switchOn(char sFamily, int nGroup, int nDevice) {
 /**
  * Switch a remote switch off (Type C Intertechno)
  *
- * @param sFamily  Familycode (a..f)
+ * @param sFamily  Familycode (a..p)
  * @param nGroup   Number of group (1..4)
  * @param nDevice  Number of device (1..4)
  */
@@ -319,7 +319,7 @@ char* RCSwitch::getCodeWordC(char sFamily, int nGroup, int nDevice, boolean bSta
   static char sReturn[13];
   int nReturnPos = 0;
 
-  if ( (byte)sFamily < 97 || (byte)sFamily > 102 || nGroup < 1 || nGroup > 4 || nDevice < 1 || nDevice > 4) {
+  if ( (byte)sFamily < 97 || (byte)sFamily > 112 || nGroup < 1 || nGroup > 4 || nDevice < 1 || nDevice > 4) {
     return '\0';
   }
 
