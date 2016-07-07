@@ -25,6 +25,7 @@
 
 // Maximum number of supported RX pins.
 // Setting this to 0 will #define RCSwitchDisableReceiving
+#define RCSWITCH_MAX_RX_PINS 1
 
 // Number of maximum High/Low changes per packet.
 // We can handle up to (unsigned long) => 32 bit * 2 H/L changes per bit + 2 for sync
