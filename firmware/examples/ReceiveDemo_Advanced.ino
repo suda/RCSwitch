@@ -89,7 +89,8 @@ void loop() {
   digitalWrite(ledPin, inputPinState);
 
   if (mySwitch.available()) {
-    output(mySwitch.getReceivedValue(), mySwitch.getReceivedBitlength(), mySwitch.getReceivedDelay(), mySwitch.getReceivedRawdata(), mySwitch.getReceivedProtocol());
+    int receivedPin = mySwitch.getReceivedPin();
+    output(mySwitch.getReceivedValue(receivedPin), mySwitch.getReceivedBitlength(receivedPin), mySwitch.getReceivedDelay(receivedPin), mySwitch.getReceivedRawdata(receivedPin), mySwitch.getReceivedProtocol(receivedPin));
     mySwitch.resetAvailable();
   }
 }
