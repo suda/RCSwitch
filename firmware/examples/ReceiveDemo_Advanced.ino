@@ -90,7 +90,13 @@ void loop() {
 
   if (mySwitch.available()) {
     int receivedPin = mySwitch.getReceivedPin();
-    output(mySwitch.getReceivedValue(receivedPin), mySwitch.getReceivedBitlength(receivedPin), mySwitch.getReceivedDelay(receivedPin), mySwitch.getReceivedRawdata(receivedPin), mySwitch.getReceivedProtocol(receivedPin));
+    output(
+        mySwitch.getReceivedValue(receivedPin),
+        mySwitch.getReceivedBitlength(receivedPin),
+        mySwitch.getReceivedDelay(receivedPin),
+        mySwitch.getReceivedRawdata(receivedPin),
+        mySwitch.getReceivedProtocol(receivedPin)
+        );
     mySwitch.resetAvailable();
   }
 }
