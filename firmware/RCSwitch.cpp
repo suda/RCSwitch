@@ -46,6 +46,7 @@ RCSwitch::RCSwitch() {
   this->setPulseLength(350);
   this->setRepeatTransmit(10);
   this->setProtocol(1);
+  this->setInvertedSignal(false);
   #if not defined( RCSwitchDisableReceiving )
   this->nReceiverInterrupt = -1;
   this->setReceiveTolerance(60);
@@ -66,6 +67,10 @@ void RCSwitch::setProtocol(int nProtocol) {
   }
   else if (nProtocol == 3) {
     this->setPulseLength(100);
+  }
+  else if (nProtocol == 8) {
+    this->setPulseLength(320);
+    this->setInvertedSignal(true);
   }
 }
 
@@ -90,6 +95,13 @@ void RCSwitch::setPulseLength(int nPulseLength) {
  */
 void RCSwitch::setRepeatTransmit(int nRepeatTransmit) {
   this->nRepeatTransmit = nRepeatTransmit;
+}
+
+/**
+ * Sets if Signal has to be transmitted inverted
+ */
+void RCSwitch::setInvertedSignal(bool bInvertedSignal) {
+    this->bInvertedSignal = bInvertedSignal;
 }
 
 /**
@@ -142,7 +154,7 @@ void RCSwitch::switchOff(char sGroup, int nDevice) {
 /**
  * Switch a remote switch on (Type C Intertechno)
  *
- * @param sFamily  Familycode (a..p)
+ * @param sFamily  Familycode (a..f)
  * @param nGroup   Number of group (1..4)
  * @param nDevice  Number of device (1..4)
   */
@@ -153,7 +165,7 @@ void RCSwitch::switchOn(char sFamily, int nGroup, int nDevice) {
 /**
  * Switch a remote switch off (Type C Intertechno)
  *
- * @param sFamily  Familycode (a..p)
+ * @param sFamily  Familycode (a..f)
  * @param nGroup   Number of group (1..4)
  * @param nDevice  Number of device (1..4)
  */
@@ -485,10 +497,18 @@ void RCSwitch::transmit(int nHighPulses, int nLowPulses) {
             disabled_Receive = true;
         }
         #endif
-        digitalWrite(this->nTransmitterPin, HIGH);
-        delayMicroseconds( this->nPulseLength * nHighPulses);
-        digitalWrite(this->nTransmitterPin, LOW);
-        delayMicroseconds( this->nPulseLength * nLowPulses);
+        
+        if (this->bInvertedSignal == false) {
+            digitalWrite(this->nTransmitterPin, HIGH);
+            delayMicroseconds( this->nPulseLength * nHighPulses);
+            digitalWrite(this->nTransmitterPin, LOW);
+            delayMicroseconds( this->nPulseLength * nLowPulses);
+        } else {
+            digitalWrite(this->nTransmitterPin, LOW);
+            delayMicroseconds( this->nPulseLength * nHighPulses);
+            digitalWrite(this->nTransmitterPin, HIGH);
+            delayMicroseconds( this->nPulseLength * nLowPulses);
+        }
 
         #if not defined( RCSwitchDisableReceiving )
         if(disabled_Receive){
@@ -514,6 +534,9 @@ void RCSwitch::send0() {
     else if (this->nProtocol == 3) {
         this->transmit(4,11);
     }
+    else if (this->nProtocol == 8) {
+        this->transmit(1,2);
+    }
 }
 
 /**
@@ -532,6 +555,9 @@ void RCSwitch::send1() {
     }
     else if (this->nProtocol == 3) {
         this->transmit(9,6);
+    }
+    else if (this->nProtocol == 8) {
+        this->transmit(2,1);
     }
 }
 
@@ -583,6 +609,9 @@ void RCSwitch::sendSync() {
     }
     else if (this->nProtocol == 3) {
         this->transmit(1,71);
+    }
+    else if (this->nProtocol == 8) {
+        this->transmit(36,1);
     }
 }
 
