@@ -71,6 +71,7 @@ class RCSwitch {
     void disableTransmit();
     void setPulseLength(int nPulseLength);
     void setRepeatTransmit(int nRepeatTransmit);
+    void setInvertedSignal(bool bInvertedSignal);
     #if not defined( RCSwitchDisableReceiving )
     void setReceiveTolerance(int nPercent);
     #endif
@@ -105,6 +106,7 @@ class RCSwitch {
     int nPulseLength;
     int nRepeatTransmit;
     char nProtocol;
+    bool bInvertedSignal;
 
     #if not defined( RCSwitchDisableReceiving )
     static int nReceiveTolerance;
